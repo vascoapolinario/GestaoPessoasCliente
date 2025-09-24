@@ -9,6 +9,7 @@ Console.WriteLine("1 - Listar Trabalhadores\n2 - Obter Trabalhador por ID\n3 - A
 Console.Write("Escolha uma opção: ");
 
 string? choice = Console.ReadLine();
+
 while (choice != "0")
 {
     switch (choice)
@@ -16,17 +17,16 @@ while (choice != "0")
         case "1":
             try
             {
+                Console.Clear();
                 var workers = await cliente.WorkersAsync();
-                String workersString = "";
                 foreach (var worker in workers)
                 {
-                    workersString = workersString + utilities.workerToString(worker) + "\n";
+                    Console.WriteLine(worker);
                 }
-                utilities.consoleClear(workersString);
             }
             catch (Exception ex)
             {
-                utilities.consoleClear($"Erro ao listar trabalhadores: {ex.Message}");
+                utilities.ClearAndShowMessage($"Erro ao listar trabalhadores: {ex.Message}");
             }
             break;
 
@@ -36,11 +36,11 @@ while (choice != "0")
 
             try
             {
-                utilities.consoleClear(utilities.workerToString(await cliente.WorkerAsync(workerId)));
+                utilities.ClearAndShowMessage((await cliente.WorkerAsync(workerId)).ToDetailedString());
             }
             catch (Exception ex)
             {
-                utilities.consoleClear($"Erro ao obter trabalhador: {ex.Message}");
+                utilities.ClearAndShowMessage($"Erro ao obter trabalhador: {ex.Message}");
             }
             break;
 
@@ -48,23 +48,23 @@ while (choice != "0")
             var newWorker = utilities.InputWorker();
             try
             {
-                utilities.consoleClear(utilities.workerToString(await cliente.AddWorkerAsync(newWorker)));
+                utilities.ClearAndShowMessage((await cliente.AddWorkerAsync(newWorker)).ToDetailedString());
             }
             catch (Exception ex)
             {
-                utilities.consoleClear($"Erro ao adicionar trabalhador: {ex.Message}");
+                utilities.ClearAndShowMessage($"Erro ao adicionar trabalhador: {ex.Message}");
             }
             break;
 
         case "4":
-            var updatedWorker = utilities.InputWorker();
+            Worker? updatedWorker = utilities.InputWorker();
             try
             {
-                utilities.consoleClear(utilities.workerToString(await cliente.UpdateWorkerAsync(updatedWorker)));
+                utilities.ClearAndShowMessage((await cliente.UpdateWorkerAsync(updatedWorker)).ToDetailedString());
             }
             catch (Exception ex)
             {
-                utilities.consoleClear($"Erro ao atualizar trabalhador: {ex.Message}");
+                utilities.ClearAndShowMessage($"Erro ao atualizar trabalhador: {ex.Message}");
             }
             break;
         case "5":
@@ -73,19 +73,20 @@ while (choice != "0")
             try
             {
                 await cliente.DeleteWorkerAsync(removeWorkerId);
-                utilities.consoleClear("Trabalhador removido com sucesso.");
+                utilities.ClearAndShowMessage("Trabalhador removido com sucesso.");
             }
             catch (Exception ex)
             {
-                utilities.consoleClear($"Erro ao remover trabalhador: {ex.Message}");
+                utilities.ClearAndShowMessage($"Erro ao remover trabalhador: {ex.Message}");
             }
             break;
         case "0":
             break;
         default:
-            utilities.consoleClear("Opção inválida. Tente novamente.");
+            utilities.ClearAndShowMessage("Opção inválida. Tente novamente.");
             break;
 
     }
+    utilities.ShowMenu();
     choice = Console.ReadLine();
 }

@@ -28,29 +28,15 @@ namespace GestaoPessoasCliente.Utils
             };
             return newWorker;
         }
-
-        public string workerToString(Worker worker)
-        {
-            Console.WriteLine(worker);
-            return $"ID: {worker.Id}, Nome: {worker.Name}, Data de Nascimento: {worker.BirthDate}, Cargo: {worker.JobTitle}, Email: {worker.Email}";
-        }
-
-        public string WorkersToString(IEnumerable<Worker> workers)
-        {
-            string result = "";
-            foreach (var worker in workers)
-            {
-                result += workerToString(worker) + "\n";
-            }
-            return result;
-        }
-
-        public void consoleClear(string Reply)
+        internal void ClearAndShowMessage(string message)
         {
             Console.Clear();
-            if (Reply != "")
-                Console.WriteLine("Resultado: \n"+ Reply + "\n");
-            Console.WriteLine("Gestão de Trabalhadores - Cliente");
+            Console.WriteLine(message);
+        }
+
+        internal void ShowMenu()
+        {
+            Console.WriteLine("\nGestão de Trabalhadores - Cliente");
             Console.WriteLine("1 - Listar Trabalhadores\n2 - Obter Trabalhador por ID\n3 - Adicionar Trabalhador\n4 - Atualizar Trabalhador\n5 - Remover Trabalhador\n0 - Sair");
             Console.Write("Escolha uma opção: ");
         }
