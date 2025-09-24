@@ -4,9 +4,7 @@ using System.ComponentModel.Design;
 
 Client cliente = new Client("https://localhost:7011", new HttpClient());
 WorkerUtilities utilities = new WorkerUtilities();
-Console.WriteLine("Gestão de Trabalhadores - Cliente");
-Console.WriteLine("1 - Listar Trabalhadores\n2 - Obter Trabalhador por ID\n3 - Adicionar Trabalhador\n4 - Atualizar Trabalhador\n5 - Remover Trabalhador\n0 - Sair");
-Console.Write("Escolha uma opção: ");
+utilities.ShowMenu();
 
 string? choice = Console.ReadLine();
 
