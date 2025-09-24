@@ -5,7 +5,7 @@ namespace GestaoPessoasCliente.Utils
 {
     public class WorkerUtilities
     {
-        public Worker InputWorker()
+        internal Worker InputWorker()
         {
             Console.WriteLine("Digite os detalhes do trabalhador:");
             Console.Write("Id: ");
@@ -29,13 +29,13 @@ namespace GestaoPessoasCliente.Utils
             return newWorker;
         }
 
-        public string workerToString(Worker worker)
+        internal string workerToString(Worker worker)
         {
             Console.WriteLine(worker);
             return $"ID: {worker.Id}, Nome: {worker.Name}, Data de Nascimento: {worker.BirthDate}, Cargo: {worker.JobTitle}, Email: {worker.Email}";
         }
 
-        public string WorkersToString(IEnumerable<Worker> workers)
+        internal string WorkersToString(IEnumerable<Worker> workers)
         {
             string result = "";
             foreach (var worker in workers)
@@ -45,7 +45,7 @@ namespace GestaoPessoasCliente.Utils
             return result;
         }
 
-        public void consoleClear(string Reply)
+        internal void consoleClear(string Reply)
         {
             Console.Clear();
             if (Reply != "")
