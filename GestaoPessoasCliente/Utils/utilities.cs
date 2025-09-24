@@ -49,10 +49,36 @@ namespace GestaoPessoasCliente.Utils
         {
             Console.Clear();
             if (Reply != "")
-                Console.WriteLine("Resultado: \n"+ Reply + "\n");
+                Console.WriteLine("Resultado: \n" + Reply + "\n");
             Console.WriteLine("Gestão de Trabalhadores - Cliente");
             Console.WriteLine("1 - Listar Trabalhadores\n2 - Obter Trabalhador por ID\n3 - Adicionar Trabalhador\n4 - Atualizar Trabalhador\n5 - Remover Trabalhador\n0 - Sair");
             Console.Write("Escolha uma opção: ");
+        }
+
+        internal void ManageException(Exception ex)
+        {
+            if (ex is ApiException apiEx)
+            {
+                switch (apiEx.StatusCode)
+                {
+                    case 400:
+                        Console.WriteLine("Requisição inválida.");
+                        break;
+                    case 404:
+                        Console.WriteLine("O Recurso procurado não foi encontrado");
+                        break;
+                    case 500:
+                        Console.WriteLine("Erro interno do servidor.");
+                        break;
+                    default:
+                        Console.WriteLine($"Erro detetado na API");
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Ocorreu um erro inesperado");
+            }
         }
     }
 }

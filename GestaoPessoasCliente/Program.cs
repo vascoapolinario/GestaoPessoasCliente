@@ -26,58 +26,58 @@ while (choice != "0")
             }
             catch (Exception ex)
             {
-                utilities.consoleClear($"Erro ao listar trabalhadores: {ex.Message}");
+                utilities.ManageException(ex);
             }
             break;
 
         case "2":
-            Console.Write("Digite o id do trabalhador: ");
-            int workerId = Convert.ToInt32(Console.ReadLine());
 
             try
             {
+                Console.Write("Digite o id do trabalhador: ");
+                int workerId = Convert.ToInt32(Console.ReadLine());
                 utilities.consoleClear(utilities.workerToString(await cliente.WorkerAsync(workerId)));
             }
             catch (Exception ex)
             {
-                utilities.consoleClear($"Erro ao obter trabalhador: {ex.Message}");
+                utilities.ManageException(ex);
             }
             break;
 
         case "3":
-            var newWorker = utilities.InputWorker();
             try
             {
+                var newWorker = utilities.InputWorker();
                 utilities.consoleClear(utilities.workerToString(await cliente.AddWorkerAsync(newWorker)));
             }
             catch (Exception ex)
             {
-                utilities.consoleClear($"Erro ao adicionar trabalhador: {ex.Message}");
+                utilities.ManageException(ex);
             }
             break;
 
         case "4":
-            var updatedWorker = utilities.InputWorker();
             try
             {
+                var updatedWorker = utilities.InputWorker();
                 utilities.consoleClear(utilities.workerToString(await cliente.UpdateWorkerAsync(updatedWorker)));
             }
             catch (Exception ex)
             {
-                utilities.consoleClear($"Erro ao atualizar trabalhador: {ex.Message}");
+                utilities.ManageException(ex);
             }
             break;
         case "5":
-            Console.Write("Digite o id do trabalhador a ser removido: ");
-            int removeWorkerId = Convert.ToInt32(Console.ReadLine());
             try
             {
+                Console.Write("Digite o id do trabalhador a ser removido: ");
+                int removeWorkerId = Convert.ToInt32(Console.ReadLine());
                 await cliente.DeleteWorkerAsync(removeWorkerId);
                 utilities.consoleClear("Trabalhador removido com sucesso.");
             }
             catch (Exception ex)
             {
-                utilities.consoleClear($"Erro ao remover trabalhador: {ex.Message}");
+                utilities.ManageException(ex);
             }
             break;
         case "0":
