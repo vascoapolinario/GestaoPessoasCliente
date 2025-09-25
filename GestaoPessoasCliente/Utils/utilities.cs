@@ -5,10 +5,15 @@ namespace GestaoPessoasCliente.Utils
 {
     public class WorkerUtilities
     {
-        internal Worker InputWorker()
+
+        public Worker InputWorker(bool NewWorker)
         {
             Console.WriteLine("Digite os detalhes do trabalhador:");
-            int id = ReadValidInt("Id: ");
+            int id = 0;
+            if (!NewWorker) {
+                Console.Write("Id: ");
+                id = Convert.ToInt32(Console.ReadLine());
+            }
             Console.Write("Nome: ");
             string name = Console.ReadLine();
             Console.Write("Data de Nascimento (yyyy-MM-dd): ");

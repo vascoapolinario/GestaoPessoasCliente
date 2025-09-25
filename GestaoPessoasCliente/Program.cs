@@ -44,7 +44,7 @@ while (choice != "0")
             break;
 
         case "3":
-            var newWorker = utilities.InputWorker();
+            var newWorker = utilities.InputWorker(true);
             try
             {
                 utilities.consoleClear(utilities.workerToString(await cliente.AddWorkerAsync(newWorker)));
@@ -56,7 +56,7 @@ while (choice != "0")
             break;
 
         case "4":
-            var updatedWorker = utilities.InputWorker();
+            var updatedWorker = utilities.InputWorker(false);
             try
             {
                 utilities.consoleClear(utilities.workerToString(await cliente.UpdateWorkerAsync(updatedWorker)));
