@@ -3,10 +3,9 @@ using System;
 
 namespace GestaoPessoasCliente.Utils
 {
-    public class WorkerUtilities
+    internal static class WorkerUtilities
     {
-
-        public Worker InputWorker(bool NewWorker)
+        internal static Worker InputWorker()
         {
             Console.WriteLine("Digite os detalhes do trabalhador:");
             int id = 0;
@@ -33,13 +32,13 @@ namespace GestaoPessoasCliente.Utils
             return newWorker;
         }
 
-        internal string workerToString(Worker worker)
+        internal static string workerToString(Worker worker)
         {
             Console.WriteLine(worker);
             return $"ID: {worker.Id}, Nome: {worker.Name}, Data de Nascimento: {worker.BirthDate}, Cargo: {worker.JobTitle}, Email: {worker.Email}";
         }
 
-        internal string WorkersToString(IEnumerable<Worker> workers)
+        internal static string WorkersToString(IEnumerable<Worker> workers)
         {
             string result = "";
             foreach (var worker in workers)
@@ -49,7 +48,7 @@ namespace GestaoPessoasCliente.Utils
             return result;
         }
 
-        internal void consoleClear(string Reply)
+        internal static void consoleClear(string Reply)
         {
             Console.Clear();
             if (Reply != "")
