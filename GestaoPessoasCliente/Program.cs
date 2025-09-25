@@ -1,6 +1,5 @@
 ﻿using GestaoPessoasCliente.ApiClients;
 using GestaoPessoasCliente.Utils;
-using System.ComponentModel.Design;
 
 Client cliente = new Client("https://localhost:7011", new HttpClient());
 Console.WriteLine("Gestão de Trabalhadores - Cliente");
@@ -30,7 +29,7 @@ while (choice != "0")
             break;
 
         case "2":
-            int workerId = utilities.ReadValidInt("Digite o id do trabalhador: ");
+            int workerId = WorkerUtilities.ReadValidInt("Digite o id do trabalhador: ");
 
             try
             {
@@ -43,7 +42,7 @@ while (choice != "0")
             break;
 
         case "3":
-            var newWorker = WorkerUtilities.InputWorker();
+            var newWorker = WorkerUtilities.InputWorker(true);
             try
             {
                 WorkerUtilities.consoleClear(WorkerUtilities.workerToString(await cliente.AddWorkerAsync(newWorker)));
@@ -55,7 +54,7 @@ while (choice != "0")
             break;
 
         case "4":
-            var updatedWorker = WorkerUtilities.InputWorker();
+            var updatedWorker = WorkerUtilities.InputWorker(false);
             try
             {
                 WorkerUtilities.consoleClear(WorkerUtilities.workerToString(await cliente.UpdateWorkerAsync(updatedWorker)));
@@ -66,7 +65,7 @@ while (choice != "0")
             }
             break;
         case "5":
-            int removeWorkerId = utilities.ReadValidInt("Digite o id do trabalhador a ser removido: ");
+            int removeWorkerId = WorkerUtilities.ReadValidInt("Digite o id do trabalhador a ser removido: ");
             try
             {
                 await cliente.DeleteWorkerAsync(removeWorkerId);

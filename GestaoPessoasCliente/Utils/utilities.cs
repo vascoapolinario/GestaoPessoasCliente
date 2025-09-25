@@ -1,15 +1,15 @@
 ﻿using GestaoPessoasCliente.ApiClients;
-using System;
 
 namespace GestaoPessoasCliente.Utils
 {
     internal static class WorkerUtilities
     {
-        internal static Worker InputWorker()
+        internal static Worker InputWorker(bool NewWorker)
         {
             Console.WriteLine("Digite os detalhes do trabalhador:");
             int id = 0;
-            if (!NewWorker) {
+            if (!NewWorker)
+            {
                 Console.Write("Id: ");
                 id = Convert.ToInt32(Console.ReadLine());
             }
@@ -52,13 +52,13 @@ namespace GestaoPessoasCliente.Utils
         {
             Console.Clear();
             if (Reply != "")
-                Console.WriteLine("Resultado: \n"+ Reply + "\n");
+                Console.WriteLine("Resultado: \n" + Reply + "\n");
             Console.WriteLine("Gestão de Trabalhadores - Cliente");
             Console.WriteLine("1 - Listar Trabalhadores\n2 - Obter Trabalhador por ID\n3 - Adicionar Trabalhador\n4 - Atualizar Trabalhador\n5 - Remover Trabalhador\n0 - Sair");
             Console.Write("Escolha uma opção: ");
         }
 
-        internal int ReadValidInt(string prompt)
+        internal static int ReadValidInt(string prompt)
         {
             int value;
             while (true)
