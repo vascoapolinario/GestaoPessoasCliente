@@ -5,6 +5,7 @@ namespace GestaoPessoasCliente.Utils
 {
     public class WorkerUtilities
     {
+
         public Worker InputWorker(bool NewWorker)
         {
             Console.WriteLine("Digite os detalhes do trabalhador:");
@@ -32,13 +33,13 @@ namespace GestaoPessoasCliente.Utils
             return newWorker;
         }
 
-        public string workerToString(Worker worker)
+        internal string workerToString(Worker worker)
         {
             Console.WriteLine(worker);
             return $"ID: {worker.Id}, Nome: {worker.Name}, Data de Nascimento: {worker.BirthDate}, Cargo: {worker.JobTitle}, Email: {worker.Email}";
         }
 
-        public string WorkersToString(IEnumerable<Worker> workers)
+        internal string WorkersToString(IEnumerable<Worker> workers)
         {
             string result = "";
             foreach (var worker in workers)
@@ -48,7 +49,7 @@ namespace GestaoPessoasCliente.Utils
             return result;
         }
 
-        public void consoleClear(string Reply)
+        internal void consoleClear(string Reply)
         {
             Console.Clear();
             if (Reply != "")
@@ -56,6 +57,20 @@ namespace GestaoPessoasCliente.Utils
             Console.WriteLine("Gestão de Trabalhadores - Cliente");
             Console.WriteLine("1 - Listar Trabalhadores\n2 - Obter Trabalhador por ID\n3 - Adicionar Trabalhador\n4 - Atualizar Trabalhador\n5 - Remover Trabalhador\n0 - Sair");
             Console.Write("Escolha uma opção: ");
+        }
+
+        internal int ReadValidInt(string prompt)
+        {
+            int value;
+            while (true)
+            {
+                Console.Write(prompt);
+                if (int.TryParse(Console.ReadLine(), out value))
+                {
+                    return value;
+                }
+                Console.WriteLine("Entrada inválida. Por favor, insira um número inteiro.");
+            }
         }
     }
 }
