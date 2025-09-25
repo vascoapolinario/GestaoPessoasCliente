@@ -30,8 +30,7 @@ while (choice != "0")
             break;
 
         case "2":
-            Console.Write("Digite o id do trabalhador: ");
-            int workerId = Convert.ToInt32(Console.ReadLine());
+            int workerId = utilities.ReadValidInt("Digite o id do trabalhador: ");
 
             try
             {
@@ -67,8 +66,7 @@ while (choice != "0")
             }
             break;
         case "5":
-            Console.Write("Digite o id do trabalhador a ser removido: ");
-            int removeWorkerId = Convert.ToInt32(Console.ReadLine());
+            int removeWorkerId = utilities.ReadValidInt("Digite o id do trabalhador a ser removido: ");
             try
             {
                 await cliente.DeleteWorkerAsync(removeWorkerId);
