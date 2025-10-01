@@ -13,10 +13,5 @@ namespace GestaoPessoasCliente.ApiClients
         {
             return $"{Name} ({Id})";
         }
-
-        public string ToDetailedString()
-        {
-            return $"| ID: {Id} | Nome: {Name} | Data de Nascimento: {BirthDate} | Cargo: {JobTitle} | Email: {Email} |";
-        }
     }
 }

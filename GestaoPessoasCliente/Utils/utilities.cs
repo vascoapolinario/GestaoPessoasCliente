@@ -1,15 +1,18 @@
 ﻿using GestaoPessoasCliente.ApiClients;
-using System;
 
 namespace GestaoPessoasCliente.Utils
 {
-    public class WorkerUtilities
+    internal static class WorkerUtilities
     {
-        public Worker InputWorker()
+        internal static Worker InputWorker(bool NewWorker)
         {
             Console.WriteLine("Digite os detalhes do trabalhador:");
-            Console.Write("Id: ");
-            int id = Convert.ToInt32(Console.ReadLine());
+            int id = 0;
+            if (!NewWorker)
+            {
+                Console.Write("Id: ");
+                id = Convert.ToInt32(Console.ReadLine());
+            }
             Console.Write("Nome: ");
             string name = Console.ReadLine();
             Console.Write("Data de Nascimento (yyyy-MM-dd): ");
@@ -28,17 +31,36 @@ namespace GestaoPessoasCliente.Utils
             };
             return newWorker;
         }
-        internal void ClearAndShowMessage(string message)
+        internal static void ClearAndShowMessage(string message)
         {
             Console.Clear();
             Console.WriteLine(message);
         }
 
-        internal void ShowMenu()
+        internal static void ShowMenu()
         {
             Console.WriteLine("\nGestão de Trabalhadores - Cliente");
             Console.WriteLine("1 - Listar Trabalhadores\n2 - Obter Trabalhador por ID\n3 - Adicionar Trabalhador\n4 - Atualizar Trabalhador\n5 - Remover Trabalhador\n0 - Sair");
             Console.Write("Escolha uma opção: ");
+        }
+
+        internal static string ToDetailedString(Worker worker)
+        {
+            return $"| ID: {worker.Id} | Nome: {worker.Name} | Data de Nascimento: {worker.BirthDate} | Cargo: {worker.JobTitle} | Email: {worker.Email} |";
+        }
+
+        internal static int ReadValidInt(string prompt)
+        {
+            int value;
+            while (true)
+            {
+                Console.Write(prompt);
+                if (int.TryParse(Console.ReadLine(), out value))
+                {
+                    return value;
+                }
+                Console.WriteLine("Entrada inválida. Por favor, insira um número inteiro.");
+            }
         }
     }
 }

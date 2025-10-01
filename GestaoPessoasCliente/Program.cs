@@ -1,6 +1,5 @@
 ﻿using GestaoPessoasCliente.ApiClients;
 using GestaoPessoasCliente.Utils;
-using System.ComponentModel.Design;
 
 Client cliente = new Client("https://localhost:7011", new HttpClient());
 WorkerUtilities utilities = new WorkerUtilities();
@@ -24,67 +23,65 @@ while (choice != "0")
             }
             catch (Exception ex)
             {
-                utilities.ClearAndShowMessage($"Erro ao listar trabalhadores: {ex.Message}");
+                WorkerUtilities.ClearAndShowMessage($"Erro ao listar trabalhadores: {ex.Message}");
             }
             break;
 
         case "2":
-            Console.Write("Digite o id do trabalhador: ");
-            int workerId = Convert.ToInt32(Console.ReadLine());
+            int workerId = WorkerUtilities.ReadValidInt("Digite o id do trabalhador: ");
 
             try
             {
-                utilities.ClearAndShowMessage((await cliente.WorkerAsync(workerId)).ToDetailedString());
+                WorkerUtilities.ClearAndShowMessage(WorkerUtilities.ToDetailedString(await cliente.WorkerAsync(workerId)));
             }
             catch (Exception ex)
             {
-                utilities.ClearAndShowMessage($"Erro ao obter trabalhador: {ex.Message}");
+                WorkerUtilities.ClearAndShowMessage($"Erro ao obter trabalhador: {ex.Message}");
             }
             break;
 
         case "3":
-            var newWorker = utilities.InputWorker();
+            var newWorker = WorkerUtilities.InputWorker(true);
             try
             {
-                utilities.ClearAndShowMessage((await cliente.AddWorkerAsync(newWorker)).ToDetailedString());
+                WorkerUtilities.ClearAndShowMessage(WorkerUtilities.ToDetailedString(await cliente.AddWorkerAsync(newWorker)));
             }
             catch (Exception ex)
             {
-                utilities.ClearAndShowMessage($"Erro ao adicionar trabalhador: {ex.Message}");
+                WorkerUtilities.ClearAndShowMessage($"Erro ao adicionar trabalhador: {ex.Message}");
             }
             break;
 
         case "4":
-            Worker? updatedWorker = utilities.InputWorker();
+            Worker? updatedWorker = WorkerUtilities.InputWorker(false);
             try
             {
-                utilities.ClearAndShowMessage((await cliente.UpdateWorkerAsync(updatedWorker)).ToDetailedString());
+                WorkerUtilities.ClearAndShowMessage(WorkerUtilities.ToDetailedString(await cliente.UpdateWorkerAsync(updatedWorker)));
             }
             catch (Exception ex)
             {
-                utilities.ClearAndShowMessage($"Erro ao atualizar trabalhador: {ex.Message}");
+                WorkerUtilities.ClearAndShowMessage($"Erro ao atualizar trabalhador: {ex.Message}");
             }
             break;
         case "5":
-            Console.Write("Digite o id do trabalhador a ser removido: ");
-            int removeWorkerId = Convert.ToInt32(Console.ReadLine());
+            int removeWorkerId = WorkerUtilities.ReadValidInt("Digite o id do trabalhador a ser removido: ");
             try
             {
                 await cliente.DeleteWorkerAsync(removeWorkerId);
-                utilities.ClearAndShowMessage("Trabalhador removido com sucesso.");
+                WorkerUtilities.ClearAndShowMessage("Trabalhador removido com sucesso.");
             }
             catch (Exception ex)
             {
-                utilities.ClearAndShowMessage($"Erro ao remover trabalhador: {ex.Message}");
+                WorkerUtilities.ClearAndShowMessage($"Erro ao remover trabalhador: {ex.Message}");
             }
             break;
         case "0":
             break;
         default:
-            utilities.ClearAndShowMessage("Opção inválida. Tente novamente.");
+            WorkerUtilities.ClearAndShowMessage("Opção inválida. Tente novamente.");
             break;
 
     }
-    utilities.ShowMenu();
+    WorkerUtilities.ShowMenu();
     choice = Console.ReadLine();
 }
