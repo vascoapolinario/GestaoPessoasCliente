@@ -77,7 +77,7 @@ namespace GestaoPessoasCliente.Utils
             }
             else
             {
-                Console.WriteLine($"Ocorreu um erro inesperado");
+                Console.WriteLine($"Ocorreu um erro inesperado\nDetalhes técnicos: {ex.Message}");
             }
         }
     }
