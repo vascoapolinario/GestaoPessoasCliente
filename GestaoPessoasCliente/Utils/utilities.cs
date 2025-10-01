@@ -44,6 +44,32 @@ namespace GestaoPessoasCliente.Utils
             Console.Write("Escolha uma opção: ");
         }
 
+        internal static void ManageException(Exception ex)
+        {
+            if (ex is ApiException apiEx)
+            {
+                switch (apiEx.StatusCode)
+                {
+                    case 400:
+                        Console.WriteLine("Requisição inválida.");
+                        break;
+                    case 404:
+                        Console.WriteLine("O Recurso procurado não foi encontrado");
+                        break;
+                    case 500:
+                        Console.WriteLine("Erro interno do servidor.");
+                        break;
+                    default:
+                        Console.WriteLine($"Erro detetado na API");
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Ocorreu um erro inesperado\nDetalhes técnicos: {ex.Message}");
+            }
+        }
+        
         internal static string ToDetailedString(Worker worker)
         {
             return $"| ID: {worker.Id} | Nome: {worker.Name} | Data de Nascimento: {worker.BirthDate} | Cargo: {worker.JobTitle} | Email: {worker.Email} |";

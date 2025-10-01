@@ -24,56 +24,57 @@ while (choice != "0")
             }
             catch (Exception ex)
             {
-                WorkerUtilities.ClearAndShowMessage($"Erro ao listar trabalhadores: {ex.Message}");
+                WorkerUtilities.ManageException(ex);
             }
             break;
 
         case "2":
-            int workerId = WorkerUtilities.ReadValidInt("Digite o id do trabalhador: ");
-
             try
             {
+                int workerId = WorkerUtilities.ReadValidInt("Digite o id do trabalhador: ");
                 WorkerUtilities.ClearAndShowMessage(WorkerUtilities.ToDetailedString(await cliente.WorkerAsync(workerId)));
             }
             catch (Exception ex)
             {
-                WorkerUtilities.ClearAndShowMessage($"Erro ao obter trabalhador: {ex.Message}");
+                WorkerUtilities.ManageException(ex);
+
             }
             break;
 
         case "3":
-            var newWorker = WorkerUtilities.InputWorker(true);
             try
             {
+                var newWorker = WorkerUtilities.InputWorker(true);
                 WorkerUtilities.ClearAndShowMessage(WorkerUtilities.ToDetailedString(await cliente.AddWorkerAsync(newWorker)));
             }
             catch (Exception ex)
             {
-                WorkerUtilities.ClearAndShowMessage($"Erro ao adicionar trabalhador: {ex.Message}");
+                WorkerUtilities.ManageException(ex);
             }
             break;
 
         case "4":
-            Worker? updatedWorker = WorkerUtilities.InputWorker(false);
             try
             {
+                var updatedWorker = WorkerUtilities.InputWorker(false);
                 WorkerUtilities.ClearAndShowMessage(WorkerUtilities.ToDetailedString(await cliente.UpdateWorkerAsync(updatedWorker)));
             }
             catch (Exception ex)
             {
-                WorkerUtilities.ClearAndShowMessage($"Erro ao atualizar trabalhador: {ex.Message}");
+                WorkerUtilities.ManageException(ex);
             }
             break;
         case "5":
-            int removeWorkerId = WorkerUtilities.ReadValidInt("Digite o id do trabalhador a ser removido: ");
             try
             {
+                Console.Write("Digite o id do trabalhador a ser removido: ");
+                int removeWorkerId = WorkerUtilities.ReadValidInt("Digite o id do trabalhador a ser removido: ");
                 await cliente.DeleteWorkerAsync(removeWorkerId);
                 WorkerUtilities.ClearAndShowMessage("Trabalhador removido com sucesso.");
             }
             catch (Exception ex)
             {
-                WorkerUtilities.ClearAndShowMessage($"Erro ao remover trabalhador: {ex.Message}");
+                WorkerUtilities.ManageException(ex);
             }
             break;
         case "0":
