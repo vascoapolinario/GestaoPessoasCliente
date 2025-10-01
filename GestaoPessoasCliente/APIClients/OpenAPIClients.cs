@@ -144,7 +144,7 @@ namespace GestaoPessoasCliente.ApiClients
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>OK</returns>
+        /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Worker> AddWorkerAsync(Worker body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
@@ -592,8 +592,6 @@ namespace GestaoPessoasCliente.ApiClients
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public System.DateOnly BirthDate { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("dAtaUltimoProcessamentoSalarial")]
-        public System.DateTimeOffset? DAtaUltimoProcessamentoSalarial { get; set; }
     }
 
 
