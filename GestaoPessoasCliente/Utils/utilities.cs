@@ -1,15 +1,18 @@
 ﻿using GestaoPessoasCliente.ApiClients;
-using System;
 
 namespace GestaoPessoasCliente.Utils
 {
-    public class WorkerUtilities
+    internal static class WorkerUtilities
     {
-        public Worker InputWorker()
+        internal static Worker InputWorker(bool NewWorker)
         {
             Console.WriteLine("Digite os detalhes do trabalhador:");
-            Console.Write("Id: ");
-            int id = Convert.ToInt32(Console.ReadLine());
+            int id = 0;
+            if (!NewWorker)
+            {
+                Console.Write("Id: ");
+                id = Convert.ToInt32(Console.ReadLine());
+            }
             Console.Write("Nome: ");
             string name = Console.ReadLine();
             Console.Write("Data de Nascimento (yyyy-MM-dd): ");
@@ -29,13 +32,13 @@ namespace GestaoPessoasCliente.Utils
             return newWorker;
         }
 
-        public string workerToString(Worker worker)
+        internal static string workerToString(Worker worker)
         {
             Console.WriteLine(worker);
             return $"ID: {worker.Id}, Nome: {worker.Name}, Data de Nascimento: {worker.BirthDate}, Cargo: {worker.JobTitle}, Email: {worker.Email}";
         }
 
-        public string WorkersToString(IEnumerable<Worker> workers)
+        internal static string WorkersToString(IEnumerable<Worker> workers)
         {
             string result = "";
             foreach (var worker in workers)
@@ -45,7 +48,7 @@ namespace GestaoPessoasCliente.Utils
             return result;
         }
 
-        public void consoleClear(string Reply)
+        internal static void consoleClear(string Reply)
         {
             Console.Clear();
             if (Reply != "")
@@ -55,7 +58,7 @@ namespace GestaoPessoasCliente.Utils
             Console.Write("Escolha uma opção: ");
         }
 
-        internal void ManageException(Exception ex)
+        internal static void ManageException(Exception ex)
         {
             if (ex is ApiException apiEx)
             {
@@ -78,6 +81,20 @@ namespace GestaoPessoasCliente.Utils
             else
             {
                 Console.WriteLine($"Ocorreu um erro inesperado\nDetalhes técnicos: {ex.Message}");
+            }
+        }
+
+        internal static int ReadValidInt(string prompt)
+        {
+            int value;
+            while (true)
+            {
+                Console.Write(prompt);
+                if (int.TryParse(Console.ReadLine(), out value))
+                {
+                    return value;
+                }
+                Console.WriteLine("Entrada inválida. Por favor, insira um número inteiro.");
             }
         }
     }

@@ -1,9 +1,7 @@
 ﻿using GestaoPessoasCliente.ApiClients;
 using GestaoPessoasCliente.Utils;
-using System.ComponentModel.Design;
 
 Client cliente = new Client("https://localhost:7011", new HttpClient());
-WorkerUtilities utilities = new WorkerUtilities();
 Console.WriteLine("Gestão de Trabalhadores - Cliente");
 Console.WriteLine("1 - Listar Trabalhadores\n2 - Obter Trabalhador por ID\n3 - Adicionar Trabalhador\n4 - Atualizar Trabalhador\n5 - Remover Trabalhador\n0 - Sair");
 Console.Write("Escolha uma opção: ");
@@ -20,70 +18,69 @@ while (choice != "0")
                 String workersString = "";
                 foreach (var worker in workers)
                 {
-                    workersString = workersString + utilities.workerToString(worker) + "\n";
+                    workersString = workersString + WorkerUtilities.workerToString(worker) + "\n";
                 }
-                utilities.consoleClear(workersString);
+                WorkerUtilities.consoleClear(workersString);
             }
             catch (Exception ex)
             {
-                utilities.ManageException(ex);
+                WorkerUtilities.ManageException(ex);
             }
             break;
 
         case "2":
-
             try
             {
                 Console.Write("Digite o id do trabalhador: ");
-                int workerId = Convert.ToInt32(Console.ReadLine());
-                utilities.consoleClear(utilities.workerToString(await cliente.WorkerAsync(workerId)));
+                int workerId = WorkerUtilities.ReadValidInt("Digite o id do trabalhador: ");
+                WorkerUtilities.consoleClear(WorkerUtilities.workerToString(await cliente.WorkerAsync(workerId)));
             }
             catch (Exception ex)
             {
-                utilities.ManageException(ex);
+                WorkerUtilities.ManageException(ex);
             }
             break;
 
         case "3":
             try
             {
-                var newWorker = utilities.InputWorker();
-                utilities.consoleClear(utilities.workerToString(await cliente.AddWorkerAsync(newWorker)));
+                var newWorker = WorkerUtilities.InputWorker(true);
+                WorkerUtilities.consoleClear(WorkerUtilities.workerToString(await cliente.AddWorkerAsync(newWorker)));
             }
             catch (Exception ex)
             {
-                utilities.ManageException(ex);
+                WorkerUtilities.ManageException(ex);
             }
             break;
 
         case "4":
             try
             {
-                var updatedWorker = utilities.InputWorker();
-                utilities.consoleClear(utilities.workerToString(await cliente.UpdateWorkerAsync(updatedWorker)));
+                var updatedWorker = WorkerUtilities.InputWorker(false);
+                WorkerUtilities.consoleClear(WorkerUtilities.workerToString(await cliente.UpdateWorkerAsync(updatedWorker)));
             }
             catch (Exception ex)
             {
-                utilities.ManageException(ex);
+                WorkerUtilities.ManageException(ex);
             }
             break;
         case "5":
             try
             {
                 Console.Write("Digite o id do trabalhador a ser removido: ");
-                int removeWorkerId = Convert.ToInt32(Console.ReadLine());
+                int removeWorkerId = WorkerUtilities.ReadValidInt("Digite o id do trabalhador a ser removido: ");
                 await cliente.DeleteWorkerAsync(removeWorkerId);
-                utilities.consoleClear("Trabalhador removido com sucesso.");
+                WorkerUtilities.consoleClear("Trabalhador removido com sucesso.");
             }
             catch (Exception ex)
             {
-                utilities.ManageException(ex);
+                WorkerUtilities.ManageException(ex);
             }
             break;
         case "0":
             break;
         default:
-            utilities.consoleClear("Opção inválida. Tente novamente.");
+            WorkerUtilities.consoleClear("Opção inválida. Tente novamente.");
             break;
 
     }
