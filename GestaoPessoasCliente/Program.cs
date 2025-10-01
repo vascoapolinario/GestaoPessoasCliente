@@ -36,7 +36,7 @@ while (choice != "0")
 
             try
             {
-                utilities.ClearAndShowMessage((await cliente.WorkerAsync(workerId)).ToDetailedString());
+                utilities.ClearAndShowMessage(utilities.ToDetailedString(await cliente.WorkerAsync(workerId)));
             }
             catch (Exception ex)
             {
@@ -48,7 +48,7 @@ while (choice != "0")
             var newWorker = utilities.InputWorker();
             try
             {
-                utilities.ClearAndShowMessage((await cliente.AddWorkerAsync(newWorker)).ToDetailedString());
+                utilities.ClearAndShowMessage(utilities.ToDetailedString(await cliente.AddWorkerAsync(newWorker)));
             }
             catch (Exception ex)
             {
@@ -60,7 +60,7 @@ while (choice != "0")
             Worker? updatedWorker = utilities.InputWorker();
             try
             {
-                utilities.ClearAndShowMessage((await cliente.UpdateWorkerAsync(updatedWorker)).ToDetailedString());
+                utilities.ClearAndShowMessage(utilities.ToDetailedString(await cliente.UpdateWorkerAsync(updatedWorker)));
             }
             catch (Exception ex)
             {
