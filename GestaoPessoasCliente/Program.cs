@@ -2,8 +2,8 @@
 using GestaoPessoasCliente.Utils;
 
 Client cliente = new Client("https://localhost:7011", new HttpClient());
-WorkerUtilities utilities = new WorkerUtilities();
-utilities.ShowMenu();
+
+WorkerUtilities.ShowMenu();
 
 string? choice = Console.ReadLine();
 
