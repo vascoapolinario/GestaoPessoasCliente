@@ -14,13 +14,14 @@ namespace GestaoPessoasCliente.Utils
                 id = Convert.ToInt32(Console.ReadLine());
             }
             Console.Write("Nome: ");
-            string name = Console.ReadLine();
+            string name = Console.ReadLine() ?? string.Empty;
             Console.Write("Data de Nascimento (yyyy-MM-dd): ");
-            DateOnly birthDate = DateOnly.Parse(Console.ReadLine());
+            string birthDateAsString = Console.ReadLine() ?? string.Empty;
+            DateOnly birthDate = DateOnly.Parse(birthDateAsString);
             Console.Write("Cargo: ");
-            string jobTitle = Console.ReadLine();
+            string jobTitle = Console.ReadLine() ?? string.Empty;
             Console.Write("Email: ");
-            string email = Console.ReadLine();
+            string email = Console.ReadLine() ?? string.Empty;
             var newWorker = new Worker
             {
                 Id = id,
@@ -69,7 +70,7 @@ namespace GestaoPessoasCliente.Utils
                 Console.WriteLine($"Ocorreu um erro inesperado\nDetalhes técnicos: {ex.Message}");
             }
         }
-        
+
         internal static string ToDetailedString(Worker worker)
         {
             return $"| ID: {worker.Id} | Nome: {worker.Name} | Data de Nascimento: {worker.BirthDate} | Cargo: {worker.JobTitle} | Email: {worker.Email} |";
