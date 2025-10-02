@@ -46,27 +46,36 @@ namespace GestaoPessoasCliente.Utils
 
         internal static void ManageException(Exception ex)
         {
-            if (ex is ApiException apiEx)
+            if (ex is ApiException<ValidationProblemDetails> apiExValidation)
+            {
+                var errors = apiExValidation.Result.Errors;
+                ClearAndShowMessage("Erro de dados inválidos:");
+                foreach (var error in errors)
+                {
+                    Console.WriteLine($"\n{error.Key}: {string.Join(", ", error.Value)}");
+                }
+            }
+            else if (ex is ApiException apiEx)
             {
                 switch (apiEx.StatusCode)
                 {
                     case 400:
-                        Console.WriteLine("Requisição inválida.");
+                        ClearAndShowMessage("Requisição inválida.");
                         break;
                     case 404:
-                        Console.WriteLine("O Recurso procurado não foi encontrado");
+                        ClearAndShowMessage("O Recurso procurado não foi encontrado");
                         break;
                     case 500:
-                        Console.WriteLine("Erro interno do servidor.");
+                        ClearAndShowMessage("Erro interno do servidor.");
                         break;
                     default:
-                        Console.WriteLine($"Erro detetado na API");
+                        ClearAndShowMessage("Erro detectado na API");
                         break;
                 }
             }
             else
             {
-                Console.WriteLine($"Ocorreu um erro inesperado\nDetalhes técnicos: {ex.Message}");
+                ClearAndShowMessage($"Ocorreu um erro inesperado\nDetalhes técnicos: {ex.Message}");
             }
         }
         
