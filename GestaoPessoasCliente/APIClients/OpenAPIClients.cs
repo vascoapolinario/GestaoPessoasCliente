@@ -734,11 +734,15 @@ namespace GestaoPessoasCliente.ApiClients
         public string Email { get; set; }
 
         /// <summary>
-        /// Data de nascimento do trabalhador. Aceita datas entre 150 anos atrás e a data atual.
+        /// Data de nascimento do trabalhador. Aceita datas entre 150 anos atr�s e a data atual.
         /// </summary>
         [System.Text.Json.Serialization.JsonPropertyName("birthDate")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public System.DateOnly BirthDate { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("timeZone")]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string TimeZone { get; set; }
 
     }
 
