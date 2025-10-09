@@ -1,7 +1,7 @@
 ﻿using GestaoPessoasCliente.ApiClients;
 using GestaoPessoasCliente.Utils;
 
-Client cliente = new Client("https://localhost:7011", new HttpClient());
+Client cliente = new Client("https://gestaopessoas.onrender.com", new HttpClient());
 
 WorkerUtilities.ShowMenu();
 

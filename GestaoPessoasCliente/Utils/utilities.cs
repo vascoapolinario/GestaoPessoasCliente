@@ -22,13 +22,16 @@ namespace GestaoPessoasCliente.Utils
             string jobTitle = Console.ReadLine() ?? string.Empty;
             Console.Write("Email: ");
             string email = Console.ReadLine() ?? string.Empty;
+            Console.Write("TimeZone: ");
+            string timeZone = Console.ReadLine() ?? string.Empty;
             var newWorker = new Worker
             {
                 Id = id,
                 Name = name,
                 BirthDate = birthDate,
                 JobTitle = jobTitle,
-                Email = email
+                Email = email,
+                TimeZone = timeZone
             };
             return newWorker;
         }
@@ -82,7 +85,7 @@ namespace GestaoPessoasCliente.Utils
 
         internal static string ToDetailedString(Worker worker)
         {
-            return $"| ID: {worker.Id} | Nome: {worker.Name} | Data de Nascimento: {worker.BirthDate} | Cargo: {worker.JobTitle} | Email: {worker.Email} |";
+            return $"| ID: {worker.Id} | Nome: {worker.Name} | Data de Nascimento: {worker.BirthDate} | Cargo: {worker.JobTitle} | Email: {worker.Email} | TimeZone: {worker.TimeZone}";
         }
 
         internal static int ReadValidInt(string prompt)
